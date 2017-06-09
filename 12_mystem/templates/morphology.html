@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Morphology</title>
+    </head>
+
+    <body>
+        <center>
+            <form method="POST" action="{{ url_for('morphology') }}">
+                <p><textarea rows="4" cols="50" name="text"></textarea></p>
+                <p><input type="submit" value="Send"></p>
+            </form>
+        </center> </br>
+
+        {% if results %}
+            <center>
+                {% for key, value in results %}
+                    <p>{{ key }}: {{ value }}</p>
+                {% endfor %}
+            </center>
+        {% endif %}
+    </body>
+</html>

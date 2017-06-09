@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Results</title>
+    </head>
+
+    <body>
+        {% if not results %}
+            <p>Not results</p>
+        {% else %}
+            {% for line in results %}
+                <p>{{ line }}</p>
+            {% endfor %}
+        {% endif %}
+    </body>
+</html>

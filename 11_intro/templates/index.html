@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Index page</title>
+    </head>
+
+    <body>
+        <form method="POST" action="{{ url_for('processing') }}">
+            <p>username: <input type="text" name="username"></p>
+            <p>Your favorite pet:</p>
+            <p><input type="radio" name="choice" value="dog"> Dog</p>
+            <p><input type="radio" name="choice" value="cat"> Cat</p>
+            <p><input type="submit" value="Send"></p>
+        </form>
+    </body>
+</html>

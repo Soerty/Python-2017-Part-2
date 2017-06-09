@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    </head>
+
+    <body>
+        <center>
+            <p><a href="/skolkovo" style="float: right; margin-right: 10px;">Skolkovo Twitter</a></p>
+            <p><a href="/gannt" style="float: right; margin-right: 10px;">Gannt diagramm</a></p>
+            <p><a href="/" style="float: right; margin-right: 10px;">Index page</a></p>
+            {% block body %}{% endblock %}
+        </center>
+    </body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+
+    <body>
+        <div>
+            <a href="/" style="float: left"> index page</a>
+            <a href="/form" style="float: right">form page</a>
+        </div>
+        <center>
+            {% block body %}{% endblock %}
+        </center>
+    </body>
+</html>

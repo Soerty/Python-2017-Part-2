@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+
+{% block title %}Lang matching{% endblock %}
+
+{% block body %}
+        {% for lang_name in results %}
+            <p>{{ lang_name }}</p>
+        {% endfor %}
+{% endblock %}

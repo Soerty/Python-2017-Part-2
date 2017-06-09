@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+
+{% block title %}Gannt diagramm{% endblock %}
+
+{% block body %}
+            <p><b>Диаграмма Ганнта работы над курсовым проектом</b></p>
+            <div id="chart_div" style="position: relative; top: 200px;"></div>
+            <script type="text/javascript">
+                google.charts.load('current', {'packages':['gantt']});
+                google.charts.setOnLoadCallback(drawChart);
+
+                function daysToMilliseconds(days) {
+                    return days * 24 * 60 * 60 * 1000;
+                }
+
+                function drawChart() {
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Task ID');
+                    data.addColumn('string', 'Task Name');
+                    data.addColumn('date', 'Start Date');
+                    data.addColumn('date', 'End Date');
+                    data.addColumn('number', 'Duration');
+                    data.addColumn('number', 'Percent Complete');
+                    data.addColumn('string', 'Dependencies');
+
+                    data.addRows([
+                        ['Research', 'Поиск информации',
+                            new Date(2015, 0, 1), new Date(2015, 0, 5), null,  100,  null],
+                        ['Write', 'Написание введения',
+                            null, new Date(2015, 0, 9), daysToMilliseconds(3), 80, 'Research,Outline'],
+                        ['Cite', 'Оформление литературы',
+                            null, new Date(2015, 0, 7), daysToMilliseconds(1), 70, 'Research'],
+                        ['Complete', 'Рецензирование',
+                            null, new Date(2015, 0, 10), daysToMilliseconds(1), 25, 'Cite,Write'],
+                        ['Outline', 'Оформление иллюстраций',
+                            null, new Date(2015, 0, 6), daysToMilliseconds(1), 100, 'Research']
+                    ]);
+
+                    var options = {
+                        height: 400,
+                        'title': 'Работа над курсовой',
+                    };
+
+                    var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+
+                    chart.draw(data, options);
+                }
+            </script>
+{% endblock %}

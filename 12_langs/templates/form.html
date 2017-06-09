@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+
+{% block title %}Form page{% endblock %}
+
+{% block body %}
+        <form method="POST" action="{{ url_for('form') }}">
+            <p>language: <input type="text" name="lang"></p>
+            <p><input type="submit" value="Send"></p>
+        </form>
+{% endblock %}
