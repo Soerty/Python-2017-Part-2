@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 #-*- coding: utf-8 -*-
+import re
 import json
+import random
 import http.client
 import urllib.parse
 
+from pymorphy2 import MorphAnalyzer
 from pymystem3 import Mystem
 from flask import Flask
 from flask import request
 from flask import render_template
 
+morph = MorphAnalyzer()
 app = Flask(__name__)
 
 
@@ -70,9 +74,10 @@ def vk():
 def mystem():
     """Allows the user to enter text for parsing in MyStem."""
     morphology = []
-    mystem = Mystem()
 
     if request.method == 'POST':
+        mystem = Mystem()
+
         for lemma in mystem.lemmatize(request.form.get('text', '')):
             item = mystem.analyze(lemma)[0]
             analysis = item.get('analysis', None)
@@ -86,9 +91,32 @@ def mystem():
     return render_template('mystem.html', results=morphology)
 
 
-@app.route('/pymorphy')
+def get_agreed_word(parsed_word, already_selected):
+    with open('words.txt') as file:
+        for line in file:
+            if random.choice([False, True, False]):
+                id, word = line[:-1].split('\t')
+                custom_word = morph.parse(word)[0]
+                if parsed_word.tag.POS == custom_word.tag.POS and \
+                        parsed_word.tag.tense == custom_word.tag.tense and \
+                        parsed_word.tag.number == custom_word.tag.number and \
+                        parsed_word.tag.aspect == custom_word.tag.aspect and \
+                        word not in already_selected:
+                    return word
+
+
+@app.route('/pymorphy', methods=['GET', 'POST'])
 def pymorphy():
-    return render_template('index.html')
+    result = []
+
+    if request.method == 'POST':        
+        pattern = re.compile(r'\W+')
+
+        for word in pattern.split(request.form.get('text', '')):
+            if word:
+                result.append(get_agreed_word(morph.parse(word)[0], result))
+
+    return render_template('pymorphy.html', result=result)
 
 
 

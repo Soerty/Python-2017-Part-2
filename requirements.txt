@@ -1,0 +1,4 @@
+flask
+pymystem3
+matplotlib
+pymorphy2
