@@ -25,8 +25,7 @@ def index():
 def type_by_related_name(connection, related_name):
     params = urllib.parse.urlencode({
         'screen_name': related_name,
-        'access_token': '8982197830b8e86e10b74bae57c91f4495bb6a9c97' \
-                        'a936c92777f8450d2f9528e11435d8917d8cb3eb782',
+        'access_token': '4b384e1c2f4f36fe0f5458f34d898dda571f55e0bc5fdccec41940a55ba0695dd7434f41641c38a789c72',
     })
     connection.request('POST', '/method/utils.resolveScreenName', params)
     response = connection.getresponse()
@@ -37,8 +36,7 @@ def type_by_related_name(connection, related_name):
 def get_members(connection, group_id):
     params = urllib.parse.urlencode({
         'group_id': group_id,
-        'access_token': '8982197830b8e86e10b74bae57c91f4495bb6a9c97' \
-                        'a936c92777f8450d2f9528e11435d8917d8cb3eb782',
+        'access_token': '4b384e1c2f4f36fe0f5458f34d898dda571f55e0bc5fdccec41940a55ba0695dd7434f41641c38a789c72',
     })
     connection.request('POST', '/method/groups.getMembers', params)
     response = connection.getresponse()
