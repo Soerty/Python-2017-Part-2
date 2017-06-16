@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block title %}Разбор текста в MyStem{% endblock %}
+
+{% block body %}
+        {% if not results %}
+            <p>Введите текст в форму ниже для его морфологического разбора.</p>
+        {% endif %}
+        
+        <form method="POST" action="{{ url_for('mystem') }}">
+            <p><textarea rows="4" cols="50" name="text"></textarea></p>
+            <p><input type="submit" value="Разобрать текст"></p>
+        </form>
+
+        {% if results %}
+            </br><p>Результат разбора вашего текста:</p>
+            {% for key, values in results %}
+                <p><b>{{ key }}</b>: <i>{{ values }}</i></p>
+            {% endfor %}
+        {% endif %}
+{% endblock %}
